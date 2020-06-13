@@ -1,0 +1,76 @@
+<div class="w-100" >
+    <app-navbar></app-navbar>
+
+    <div class="container my-5 " id ="informacion">
+        <div class=" animated fadeIn fast row" id="filtros">
+            <div class="col-md-2 ">
+                <mat-form-field>
+                    <mat-label>Tipos</mat-label>
+                    <mat-select [formControl]="types" (selectionChange)="selectType($event)" multiple>
+                    <mat-option *ngFor="let type of typeList" [value]="type">{{type}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class= "col-md-2 ">
+                <mat-form-field>
+                    <mat-label>Valores</mat-label>
+                    <mat-select [formControl]="types" (selectionChange)="selectValues($event)" multiple>
+                    <mat-option *ngFor="let valor of valores" [value]="valor">{{valor}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class= "col-md-2">
+                <mat-form-field>
+                    <mat-label>Puntos</mat-label>
+                    <mat-select [formControl]="types" (selectionChange)="selectPoints($event)" multiple>
+                    <mat-option *ngFor="let punto of puntos" [value]="punto">{{punto}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-2">
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker" (dateChange)="setStartDate($event)" placeholder="Fecha de inicio">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <p *ngIf="dateError" class="text-danger">Fecha invalida</p>
+            </div>
+            <div class="col-md-2">
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker2" (dateChange)="setEndDate($event)" placeholder="Fecha de finalización">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+                <p *ngIf="dateError" class="text-danger">Fecha invalida</p>
+            </div>
+            <div class="col-md-2">
+                <button class="mt-3 btn btn-warning"  (click)="filter()">Filtrar Información</button>
+            </div>
+        </div>
+        <mat-list>
+            <h3 *ngIf="apiError"> No fue posible traer las transacciones </h3>
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Información</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let transaction of transactions | searchV:searchValuesV | search:searchValues | searchP:searchPoints">
+                <tr class=" w-100 my-5 animated fadeIn">
+                  <td> <p mat-line> {{transaction.createdDate | date}} </p></td>
+                  <td> <button type="button" class="btn btn-warning" (click)="openDialog(transaction)">Ver detalle</button></td>
+                </tr>
+              </tbody>
+            </table>
+        </mat-list>
+    </div>
+</div>
+
+<footer id="footer" class="page-footer font-small bg-dark">
+  <div class="footer-copyright text-center py-3 text-warning">© 2020 Copyright:
+    <a href="https://landing.leal.co/" class="text-warning"> Landing.leal.co</a>
+  </div>
+</footer>
+
+

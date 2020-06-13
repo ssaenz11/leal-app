@@ -1,0 +1,22 @@
+
+
+.example-full-width {
+    width: 100%;
+}
+
+.example-card {
+    width: 400px;
+}
+#fondo{
+	background-image: url('http://cdn.puntosleal.com/assets/img/banner-principal.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+color: #f0ad4e !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+background-color: #f0ad4e !important;;
+}
